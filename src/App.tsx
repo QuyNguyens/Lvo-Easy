@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
 import routes from './routes/routes';
+import { AuthProvider, createAuthValue } from './context/UserContext';
 
 function AppRoutes() {
   const element = useRoutes(routes);
@@ -8,10 +9,14 @@ function AppRoutes() {
 }
 
 function App() {
+   const auth = createAuthValue();
+
   return (
-    <Router>
-      <AppRoutes />
-    </Router>
+    <AuthProvider value={auth}>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </AuthProvider>
   );
 }
 
