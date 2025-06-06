@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Avatar from '../assets/avatar.webp';
 
 export default function AvatarDropdown() {
   const [open, setOpen] = useState(false);
   const [themeOpen, setThemeOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   const toggleDropdown = () => setOpen(!open);
   const toggleTheme = () => setThemeOpen(!themeOpen);
@@ -54,7 +56,7 @@ export default function AvatarDropdown() {
               className="w-full px-4 py-2 text-left hover:bg-gray-100 flex justify-between items-center"
               onClick={toggleTheme}
             >
-              <span>Themes</span>
+              <span>{t("themes")}</span>
               <svg
                 className={`w-4 h-4 transition-transform ${themeOpen ? "rotate-90" : ""}`}
                 fill="none"
@@ -76,19 +78,19 @@ export default function AvatarDropdown() {
                   className="w-full px-4 py-2 text-left hover:bg-gray-100"
                   onClick={() => handleThemeSelect("Light")}
                 >
-                  🌕 Light
+                  🌕 {t("light")}
                 </button>
                 <button
                   className="w-full px-4 py-2 text-left hover:bg-gray-100"
                   onClick={() => handleThemeSelect("Dark")}
                 >
-                  🌑 Dark
+                  🌑 {t("dark")}
                 </button>
                 <button
                   className="w-full px-4 py-2 text-left hover:bg-gray-100"
                   onClick={() => handleThemeSelect("System")}
                 >
-                  💻 System
+                  💻 {t("system")}
                 </button>
               </div>
             )}
@@ -98,13 +100,13 @@ export default function AvatarDropdown() {
             className="w-full px-4 py-2 text-left hover:bg-gray-100"
             onClick={() => handleSelect("Profile")}
           >
-            Profile
+            {t("profile")}
           </button>
           <button
             className="w-full px-4 py-2 text-left hover:bg-gray-100 text-red-500"
             onClick={() => handleSelect("Logout")}
           >
-            Logout
+            {t("logout")}
           </button>
         </div>
       )}

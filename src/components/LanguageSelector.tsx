@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { useTranslation } from "react-i18next";
 
 const languages = [
   {
@@ -17,10 +18,25 @@ const languages = [
 export default function LanguageSelector() {
   const [selected, setSelected] = useState(languages[0]);
   const [isOpen, setIsOpen] = useState(false);
+  const { i18n } = useTranslation();
+
+  useEffect(() =>{
+    const savedLangCode = localStorage.getItem("language");
+    const matchedLang = languages.find((l) => l.code === savedLangCode);
+
+    if (matchedLang) {
+      setSelected(matchedLang);
+      i18n.changeLanguage(matchedLang.code);
+    } else {
+      i18n.changeLanguage(selected.code);
+    }
+  },[]);
 
   const handleSelect = (lang: typeof selected) => {
     setSelected(lang);
+    i18n.changeLanguage(lang.code);
     setIsOpen(false);
+    localStorage.setItem('language', lang.code);
   };
 
   return (

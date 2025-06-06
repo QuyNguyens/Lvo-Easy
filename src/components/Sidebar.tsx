@@ -1,9 +1,14 @@
 // src/components/Sidebar.tsx
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
-
+import { Cog6ToothIcon } from '@heroicons/react/24/outline';
+import { UserCircleIcon } from '@heroicons/react/24/outline';
+import { BookOpenIcon } from '@heroicons/react/24/outline';
 const Sidebar = () => {
+    
+    const { t } = useTranslation();
   return (
     <aside className="flex flex-col gap-4 w-64 p-4 mt-10">
         <NavLink
@@ -15,7 +20,7 @@ const Sidebar = () => {
             }
             >
             <PencilSquareIcon className="h-7 w-7" />
-            Write-VOCAB
+            {t("writeVocab")}
         </NavLink>
         <NavLink
             to="/my-vocab"
@@ -26,7 +31,7 @@ const Sidebar = () => {
             }
             >
             <AcademicCapIcon className="h-7 w-7" />
-            My-VOCAB
+            {t("myVocab")}
         </NavLink>
         <NavLink
             to="/system-vocab"
@@ -36,8 +41,8 @@ const Sidebar = () => {
                 }`
             }
             >
-            <AcademicCapIcon className="h-7 w-7" />
-            System-VOCAB
+            <BookOpenIcon className="h-7 w-7" />
+            {t("systemVocab")}
         </NavLink>
         <NavLink
             to="/profile"
@@ -47,8 +52,8 @@ const Sidebar = () => {
                 }`
             }
             >
-            <AcademicCapIcon className="h-7 w-7" />
-            Profile
+            <UserCircleIcon className="h-7 w-7" />
+            {t("profile")}
         </NavLink>
         <NavLink
           to="/settings"
@@ -58,8 +63,8 @@ const Sidebar = () => {
               }`
           }
           >
-          <AcademicCapIcon className="h-7 w-7" />
-          Settings
+          <Cog6ToothIcon className="h-7 w-7" />
+          {t("settings")}
       </NavLink>
     </aside>
   );

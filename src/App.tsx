@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
 import routes from './routes/routes';
 import { AuthProvider, createAuthValue } from './context/UserContext';
+import "./i18n";
 
 function AppRoutes() {
   const element = useRoutes(routes);
