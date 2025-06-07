@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import Avatar from '../assets/avatar.webp';
+import Avatar from "../assets/avatar.webp";
+import ThemeSelector from "./ThemeSelector";
 
 export default function AvatarDropdown() {
   const [open, setOpen] = useState(false);
@@ -27,7 +28,15 @@ export default function AvatarDropdown() {
 
   const handleThemeSelect = (theme: string) => {
     setThemeOpen(false);
-    alert(`Selected theme: ${theme}`);
+    document.documentElement.classList.remove("light", "dark");
+    if (theme === "system") {
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.classList.add(isDark ? "dark" : "light");
+      localStorage.setItem("theme", "system");
+    } else {
+      document.documentElement.classList.add(theme);
+      localStorage.setItem("theme", theme);
+    }
   };
 
   const handleSelect = (option: string) => {
@@ -58,7 +67,9 @@ export default function AvatarDropdown() {
             >
               <span>{t("themes")}</span>
               <svg
-                className={`w-4 h-4 transition-transform ${themeOpen ? "rotate-90" : ""}`}
+                className={`w-4 h-4 transition-transform ${
+                  themeOpen ? "rotate-90" : ""
+                }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -72,28 +83,7 @@ export default function AvatarDropdown() {
               </svg>
             </button>
 
-            {themeOpen && (
-              <div className="absolute top-0 left-full ml-1 w-28 bg-white border rounded-md shadow-lg z-50">
-                <button
-                  className="w-full px-4 py-2 text-left hover:bg-gray-100"
-                  onClick={() => handleThemeSelect("Light")}
-                >
-                  🌕 {t("light")}
-                </button>
-                <button
-                  className="w-full px-4 py-2 text-left hover:bg-gray-100"
-                  onClick={() => handleThemeSelect("Dark")}
-                >
-                  🌑 {t("dark")}
-                </button>
-                <button
-                  className="w-full px-4 py-2 text-left hover:bg-gray-100"
-                  onClick={() => handleThemeSelect("System")}
-                >
-                  💻 {t("system")}
-                </button>
-              </div>
-            )}
+            {themeOpen && <ThemeSelector onSelect={handleThemeSelect} />}
           </div>
 
           <button

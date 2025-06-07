@@ -43,15 +43,15 @@ export default function LanguageSelector() {
     <div className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between border rounded px-6 py-3 shadow-sm hover:bg-gray-100"
+        className="flex items-center justify-between border rounded px-6 py-3 shadow-sm"
       >
         <img
           src={selected.icon}
           alt={selected.code}
           className="w-5 h-5 rounded-full mr-2"
         />
-        <span className="font-medium">{selected.code}</span>
-        <ChevronDownIcon className="w-4 h-4 ml-2" />
+        <span className="font-medium dark:text-white">{selected.code}</span>
+        <ChevronDownIcon className="w-4 h-4 ml-2 dark:text-white" />
       </button>
 
       {isOpen && (

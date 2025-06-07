@@ -10,12 +10,12 @@ const Sidebar = () => {
     
     const { t } = useTranslation();
   return (
-    <aside className="flex flex-col gap-4 w-64 p-4 mt-10">
+    <aside className="flex flex-col border border-r border-gray-200 gap-4 w-64 p-4 pt-10 dark:bg-black-400">
         <NavLink
             to="/"
             className={({ isActive }) =>
-                `flex items-center gap-2 font-medium hover:text-white hover:bg-black px-3 py-3 rounded   ${
-                isActive ? ' text-white bg-black' : 'text-black'
+                `flex items-center gap-2 font-medium hover:text-white hover:bg-black px-3 py-3 rounded dark:hover:bg-white dark:hover:text-black ${
+                isActive ? ' text-white bg-black dark:text-black dark:bg-white' : 'text-black dark:text-white'
                 }`
             }
             >
@@ -24,9 +24,9 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
             to="/my-vocab"
-            className={({ isActive }) =>
-                `flex items-center gap-2 font-medium hover:text-white hover:bg-black px-3 py-3 rounded ${
-                isActive ? ' text-white bg-black' : 'text-black'
+             className={({ isActive }) =>
+                `flex items-center gap-2 font-medium hover:text-white hover:bg-black px-3 py-3 rounded dark:hover:bg-white dark:hover:text-black ${
+                isActive ? ' text-white bg-black dark:text-black dark:bg-white' : 'text-black dark:text-white'
                 }`
             }
             >
@@ -35,9 +35,9 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
             to="/system-vocab"
-            className={({ isActive }) =>
-                `flex items-center gap-2 font-medium hover:text-white hover:bg-black px-3 py-3 rounded ${
-                isActive ? ' text-white bg-black' : 'text-black'
+             className={({ isActive }) =>
+                `flex items-center gap-2 font-medium hover:text-white hover:bg-black px-3 py-3 rounded dark:hover:bg-white dark:hover:text-black ${
+                isActive ? ' text-white bg-black dark:text-black dark:bg-white' : 'text-black dark:text-white'
                 }`
             }
             >
@@ -46,9 +46,9 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
             to="/profile"
-            className={({ isActive }) =>
-                `flex items-center gap-2 font-medium hover:text-white hover:bg-black px-3 py-3 rounded ${
-                isActive ? ' text-white bg-black' : 'text-black'
+             className={({ isActive }) =>
+                `flex items-center gap-2 font-medium hover:text-white hover:bg-black px-3 py-3 rounded dark:hover:bg-white dark:hover:text-black ${
+                isActive ? ' text-white bg-black dark:text-black dark:bg-white' : 'text-black dark:text-white'
                 }`
             }
             >
@@ -57,11 +57,11 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           to="/settings"
-          className={({ isActive }) =>
-              `flex items-center gap-2 font-medium hover:text-white hover:bg-black px-3 py-3 rounded ${
-              isActive ? ' text-white bg-black' : 'text-black'
-              }`
-          }
+           className={({ isActive }) =>
+                `flex items-center gap-2 font-medium hover:text-white hover:bg-black px-3 py-3 rounded dark:hover:bg-white dark:hover:text-black ${
+                isActive ? ' text-white bg-black dark:text-black dark:bg-white' : 'text-black dark:text-white'
+                }`
+            }
           >
           <Cog6ToothIcon className="h-7 w-7" />
           {t("settings")}

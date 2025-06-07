@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import authApi from '../api/authApi';
 import { useState } from 'react';
 import { SignInRequest } from '../types/user';
+import { useAuth } from '../context/UserContext';
 
 const LoginPage = () => {
   const [signinRequest, setSigninRequest] = useState<SignInRequest>({
@@ -18,12 +19,14 @@ const LoginPage = () => {
   })
   const [isConfirmPassword, setIsConfirmPassword] = useState<boolean>(false);
 
+  const {setUser} = useAuth();
+
   const navigate = useNavigate();
   
   const handleLogin = async () =>{
     try {
       const res = await authApi.login(signinRequest);
-      console.log('res: ', res);
+      setUser(res.userId, res.email);
       localStorage.setItem('access_token', res.token);
       navigate('/');
     } catch (err: any) {

@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -12,6 +13,7 @@ export default {
         "blue-50": "#F1F9F9",
         "green-100": "#F1F5F2",
         "gray-200": "#A09E9E",
+        "black-400": "#000000",
       },
       fontSize: {
         base12: "12px",
