@@ -24,11 +24,11 @@ const WriteVocabPage = () => {
   });
   const [isEmptyField, setIsEmptyField] = useState<boolean>(false);
 
-  const {userId} = useAuth();
+  const {user} = useAuth();
 
   const fetchTopic = async () =>{
     try {
-      const topicsData = await topicApi.getAll();
+      const topicsData = await topicApi.getAll(user._id || "");
       setSelectedTopic(topicsData[0]);
       setTopics(topicsData);
     } catch (error) {
@@ -68,7 +68,7 @@ const WriteVocabPage = () => {
         example: sentences,
         topicId: '',
         isSystemVocab: false,
-        createdBy: userId || '',
+        createBy: user._id || '',
         topicName: ''
       }
       if(vocabs.enWord === "" || vocabs.viWord == ""){
@@ -93,7 +93,7 @@ const WriteVocabPage = () => {
   }
 
   const handleVocabChange = (key: keyof VocabType, value: string) => {
-    const trimmedValue = value.trim();
+    const trimmedValue = value;
 
     setVocabs((prev) => ({
       ...prev,

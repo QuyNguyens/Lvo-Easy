@@ -2,15 +2,19 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Avatar from "../assets/avatar.webp";
 import ThemeSelector from "./ThemeSelector";
+import { useAuth } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function AvatarDropdown() {
   const [open, setOpen] = useState(false);
   const [themeOpen, setThemeOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
-
+  const {clearUser} = useAuth();
   const toggleDropdown = () => setOpen(!open);
   const toggleTheme = () => setThemeOpen(!themeOpen);
+  const navigate = useNavigate();
+  const {user} = useAuth();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -40,23 +44,29 @@ export default function AvatarDropdown() {
   };
 
   const handleSelect = (option: string) => {
+    if(option === "Logout"){
+      clearUser();
+      navigate('/login');
+    }
     setOpen(false);
     setThemeOpen(false);
-    alert(`You clicked: ${option}`);
   };
 
   return (
     <div className="relative inline-block text-left" ref={dropdownRef}>
-      <button
+      <div className="flex gap-3 items-center"
         onClick={toggleDropdown}
-        className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center"
       >
         <img
-          src={Avatar}
+          src={user?.avatar ||Avatar}
           alt="avatar"
-          className="w-full h-full rounded-full object-cover"
+          className="w-12 h-12 rounded-full object-cover"
         />
-      </button>
+        <div className="flex flex-col">
+          <span className="text-sm dark:text-white font-medium">{user?.name}</span>
+          <span className="text-sm text-gray-700 dark:text-gray-300">{user?.email}</span>
+        </div>
+      </div>
 
       {open && (
         <div className="absolute right-0 mt-2 w-36 bg-white border rounded-md shadow-lg z-50">

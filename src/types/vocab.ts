@@ -4,6 +4,6 @@ export interface VocabCreateRequest{
     example: string[];
     topicId?: string;
     isSystemVocab: boolean;
-    createdBy: string;
+    createBy: string;
     topicName?: string;
 }

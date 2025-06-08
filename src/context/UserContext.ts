@@ -1,10 +1,10 @@
 // src/contexts/AuthContext.tsx
 import { createContext, useContext, useState } from 'react';
+import { UserProfile } from '../types/user';
 
 interface AuthContextType {
-  userId: string | null;
-  email: string | null;
-  setUser: (id: string, name: string) => void;
+  user: UserProfile;
+  setUser: (user: UserProfile) => void;
   clearUser: () => void;
 }
 
@@ -21,18 +21,29 @@ export const useAuth = () => {
 export const AuthProvider = AuthContext.Provider;
 
 export const createAuthValue = () => {
-  const [userId, setUserId] = useState<string | null>(null);
-  const [email, setEmail] = useState<string | null>(null);
+    const [user, setUserState] = useState<UserProfile | null>(() => {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        try {
+          return JSON.parse(storedUser) as UserProfile;
+        } catch {
+          return null;
+        }
+      }
+      return null;
+    });
 
-  const setUser = (id: string, name: string) => {
-    setUserId(id);
-    setEmail(name);
+  const setUser = (user: UserProfile) => {
+    setUserState(user);
+    localStorage.setItem('user', JSON.stringify(user));
   };
 
   const clearUser = () => {
-    setUserId(null);
-    setEmail(null);
+    setUserState(null);
+    localStorage.removeItem('user');
+    localStorage.removeItem('access_token');
   };
 
-  return { userId, email, setUser, clearUser };
+
+  return { user, setUser, clearUser };
 };

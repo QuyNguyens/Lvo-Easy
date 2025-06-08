@@ -32,5 +32,15 @@
   "next": "Next",
   "continue": "Continue",
   "known": "I already know this word",
-  "unKnown": "I don't know"
+  "unKnown": "I don't know",
+  "changeAvatar": "Change Avatar",
+  "changePassword": "Change Password",
+  "updateProfile": "UpdateProfile",
+  "confirmPassword": "Confirm Password",
+  "newPassword": "New Password",
+  "name": "Name",
+  "hidePassword": "Hide password",
+  "incorrectPassword": "Password must be the same!!!",
+  "updateSuccess": "Updated successfully",
+  "updateFailed": "Updated Failed!!!"
 }

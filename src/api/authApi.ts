@@ -21,6 +21,24 @@ const authApi = {
     getProfile: (): Promise<UserProfile> => {
         return axiosClient.get('/users/profile');
     },
+
+    updateProfile: async (data: UserProfile): Promise<UserProfile> => {
+        const formData = new FormData();
+        if(data?.name){
+            formData.append('name', data.name);
+        }
+        if (data.avatarFile) {
+            console.log('data: ',data);
+            formData.append('file', data.avatarFile);
+        }
+        if (data.password) {
+        formData.append('password', data.password);
+        }
+
+        const response = await axiosClient.put<AuthResponse>('/users/update', formData);
+        return response.data.data;
+    },
+
 };
 
 export default authApi;

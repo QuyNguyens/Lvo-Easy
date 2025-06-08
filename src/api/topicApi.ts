@@ -2,8 +2,8 @@ import { Topic } from "../types/topic";
 import axiosClient from "./axiosClient";
 
 const topicApi = {
-    getAll: async () :Promise<Topic[]> => {
-       const res = await axiosClient.get('/topics/all?isTopic=false');
+    getAll: async (userId: string) :Promise<Topic[]> => {
+       const res = await axiosClient.get(`/topics/all?isTopic=false&userId=${userId}`);
         return res.data.data;
     }
 }

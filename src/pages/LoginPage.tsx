@@ -9,7 +9,7 @@ import InputIcon from '../components/InputIcon';
 import { useNavigate } from 'react-router-dom';
 import authApi from '../api/authApi';
 import { useState } from 'react';
-import { SignInRequest } from '../types/user';
+import { SignInRequest, UserProfile } from '../types/user';
 import { useAuth } from '../context/UserContext';
 
 const LoginPage = () => {
@@ -26,7 +26,13 @@ const LoginPage = () => {
   const handleLogin = async () =>{
     try {
       const res = await authApi.login(signinRequest);
-      setUser(res.userId, res.email);
+      const user: UserProfile = {
+        email: res.email,
+        _id: res.userId,
+        avatar: res.avatar,
+        name: res?.name
+      }
+      setUser(user);
       localStorage.setItem('access_token', res.token);
       navigate('/');
     } catch (err: any) {

@@ -32,5 +32,16 @@
   "next": "Tiếp theo",
   "continue": "Tiếp tục",
   "known": "Tôi đã biết từ này",
-  "unKnown": "Tôi không biết"
+  "unKnown": "Tôi không biết",
+  "changeAvatar": "Thay đổi ảnh",
+  "changePassword": "Thay đổi mật khẩu",
+  "updateProfile": "Cập nhật hồ sơ",
+  "confirmPassword": "Xác nhận lại mật khẩu",
+  "newPassword": "Mật khẩu mới",
+  "name": "Tên",
+  "hidePassword": "Ẩn mật khẩu",
+  "incorrectPassword": "Mật khẩu không trùng khớp!!!",
+  "updateSuccess": "Đã cập nhật thành công",
+  "updateFailed": "Cập nhật thất bại!!!"
+
 }

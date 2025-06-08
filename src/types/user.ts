@@ -2,6 +2,8 @@ export interface AuthData {
   token: string;
   userId: string;
   email: string;
+  avatar?: string;
+  name?: string;
 }
 
 export interface AuthResponse {
@@ -23,7 +25,10 @@ export interface SignUpRequest{
 }
 
 export interface UserProfile {
-  _id: string;
-  name: string;
+  _id?: string;
+  name?: string;
   email: string;
+  avatar?: string;
+  avatarFile?: File | null;
+  password?: string;
 }
