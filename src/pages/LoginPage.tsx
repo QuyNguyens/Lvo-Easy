@@ -83,10 +83,18 @@ const LoginPage = () => {
           <div className='flex-1 h-px bg-gray-300'></div>
         </div>
         <div className='flex gap-9 justify-center items-center'>
-          <div className='flex justify-center items-center p-3 rounded-md bg-white hover:bg-gray-50 shadow-sm'>
+          <div className='flex justify-center items-center p-3 rounded-md bg-white hover:bg-gray-50 shadow-sm'
+            onClick={() => {
+              window.location.href = 'http://localhost:3000/auth/google';
+            }}
+          >
             <img className='w-6 h-6' src={GoogleIcon} alt="" />
           </div>
-          <div className='flex justify-center items-center p-3 rounded-md bg-white hover:bg-gray-50 shadow-sm'>
+          <div className='flex justify-center items-center p-3 rounded-md bg-white hover:bg-gray-50 shadow-sm'
+            onClick={() => {
+              window.location.href = 'http://localhost:3000/auth/facebook';
+            }}
+          > 
             <img className='w-6 h-6' src={FacebookIcon} alt="" />
           </div>
           <div className='flex justify-center items-center p-3 rounded-md bg-white hover:bg-gray-50 shadow-sm'>

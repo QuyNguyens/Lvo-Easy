@@ -5,6 +5,7 @@ import PrivateRoute from '../components/PrivateRoute';
 import PublicRoute from '../components/PublicRoute';
 import Layout from '../components/Layout';
 import MyVocabLayout from '../components/MyVocabLayout';
+import AuthSuccess from '../pages/AuthSuccess';
 
 const SettingsPage = lazy(() => import('../pages/SettingsPage'));
 const WriteVocabPage = lazy(() => import('../pages/WriteVocabPage'));
@@ -30,6 +31,10 @@ const routes: RouteObject[] = [
   {
     path: '/signup',
     element: <PublicRoute><SignUpPage /></PublicRoute>,
+  },
+  {
+    path: '/auth-success',
+    element: <PublicRoute><AuthSuccess/></PublicRoute>
   },
   {
     path: '/',

@@ -74,6 +74,7 @@ const Profile: React.FC = () => {
 
     try {
       const data:UserProfile = {
+        _id: user?._id,
         email: formData.email,
         password: formData.newPassword,
         name: formData.name,

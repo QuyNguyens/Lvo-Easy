@@ -9,6 +9,11 @@ import {
 
 const authApi = {
 
+    loginToken: async (type: string): Promise<AuthData> => {
+        const response = await axiosClient.get<AuthResponse>(`/users/login-token?type=${type}`); 
+        return response.data.data;
+    },
+
     login: async (data: SignInRequest): Promise<AuthData> => {
         const response = await axiosClient.post<AuthResponse>('/users/signin', data);
         return response.data.data;
@@ -23,7 +28,11 @@ const authApi = {
     },
 
     updateProfile: async (data: UserProfile): Promise<UserProfile> => {
+        console.log('data: ', data);
         const formData = new FormData();
+        if(data?._id){
+            formData.append('id', data._id);
+        }
         if(data?.name){
             formData.append('name', data.name);
         }
@@ -31,10 +40,10 @@ const authApi = {
             formData.append('file', data.avatarFile);
         }
         if (data.password) {
-        formData.append('password', data.password);
+            formData.append('password', data.password);
         }
 
-        const response = await axiosClient.put<AuthResponse>('/users/update', formData);
+        const response = await axiosClient.put<AuthResponse>(`/users/update`, formData);
         return response.data.data;
     },
 

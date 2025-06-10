@@ -7,7 +7,7 @@ const Sidebar = () => {
   const { t } = useTranslation();
 
   return (
-    <aside className="flex flex-row xl:flex-col md:flex-col h-full justify-around md:justify-start border border-r-0 md:border-r border-gray-200 gap-4 w-full px-3 xl:w-64 p-2 md:p-4 xl:pt-10 lg:pt-10 dark:bg-black-400">
+    <aside className="flex flex-row xl:flex-col md:flex-col h-full md:border-t-0 justify-around md:justify-start border border-r-0 md:border-r border-gray-200 gap-4 w-full px-3 xl:w-64 p-2 md:p-4 xl:pt-10 lg:pt-10 dark:bg-black-400">
       {sidebarLinks.map(({ path, label, icon: Icon }) => (
         <NavLink
           key={path}
