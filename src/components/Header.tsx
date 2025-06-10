@@ -5,10 +5,10 @@ import LanguageSelector from './LanguageSelector';
 
 const Header = () => {
   return (
-    <div className="h-20 flex items-center shadow-md dark:border dark:border-b dark:border-gray-200 justify-between px-12 py-2 bg-white dark:bg-black-400">
+    <div className="sticky top-0 h-20 flex items-center shadow-md dark:border dark:border-b dark:border-gray-200 justify-between px-12 py-2 bg-white dark:bg-black-400">
       <img src={Logo} alt="logo" className="block dark:hidden" />
       <img src={LogoDark} alt="logo-dark" className="hidden dark:block" />
-      <div className='flex items-center gap-8 mr-20'>
+      <div className='flex items-center gap-8 mr-5 md:mr-20'>
         <LanguageSelector/>
         <AvatarDropdown/>
       </div>

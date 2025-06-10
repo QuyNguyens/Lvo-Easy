@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from 'react';
 import { UserProfile } from '../types/user';
 
 interface AuthContextType {
-  user: UserProfile;
+  user: UserProfile | null;
   setUser: (user: UserProfile) => void;
   clearUser: () => void;
 }

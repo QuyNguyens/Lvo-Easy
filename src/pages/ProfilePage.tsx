@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
+import React, { useState, useRef, ChangeEvent } from 'react';
 import { useAuth } from '../context/UserContext';
 import { useTranslation } from 'react-i18next';
 import AvatarIcon from '../assets/avatar.webp';
 import authApi from '../api/authApi';
 import { UserProfile } from '../types/user';
 import Toast from '../components/Toast';
+import { useToast } from '../hooks/useToast';
 interface UserFormData {
   name: string;
   email: string;
@@ -16,43 +17,23 @@ interface UserFormData {
   confirmPassword: string;
 }
 
-interface ToastData {
-  message: string;
-  status: 'success' | 'error' | 'info';
-  show: boolean;
-}
 const Profile: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isCorrectPassword, setIsCorrectPassword] = useState<boolean>(false);
   const {t} = useTranslation();
-
-  const [showToast, setShowToast] = useState<ToastData>({
-    message: t("updateSuccess"),
-    status: 'success',
-    show: false
-  });
-
+  const {toast, showToast} = useToast();
 
   const {user, setUser} = useAuth();
 
   const [formData, setFormData] = useState<UserFormData>({
     name: user?.name || '',
-    email: user?.email,
+    email: user?.email || '',
     avatar: user?.avatar || '',
     avatarFile: null,
     showPasswordFields: false,
     newPassword: '',
     confirmPassword: ''
   });
-
-  useEffect(() => {
-  if (showToast.show) {
-    const timer = setTimeout(() => {
-      setShowToast(pre => ({ ...pre, show: false }));
-    }, 3000);
-    return () => clearTimeout(timer);
-  }
-}, [showToast.show]);
 
   const handleAvatarClick = () => {
     fileInputRef.current?.click();
@@ -100,22 +81,13 @@ const Profile: React.FC = () => {
       }
       const res = await authApi.updateProfile(data);
       if(res){
-        setShowToast(pre =>({
-          ...pre,
-          message: t("updateSuccess"),
-          status: 'success',
-          show: true
-        }));
+        showToast(t("updateSuccess"), 'success');
         setUser(res);
       }
     } catch (error) {
       console.error(error);
-      setShowToast(pre =>({
-        ...pre,
-        message: t("updateFailed"),
-        status: 'error',
-        show: true
-      }));
+      showToast(t("updateFailed"), 'error');
+
     }
   };
 
@@ -214,7 +186,7 @@ const Profile: React.FC = () => {
             </div>
           </>
         )}
-        {showToast.show && <Toast message={showToast.message} status={showToast.status} />}
+        {toast.show && <Toast message={toast.message} status={toast.status} />}
       </div>
 
       {/* Submit */}

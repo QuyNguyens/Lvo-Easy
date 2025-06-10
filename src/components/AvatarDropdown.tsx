@@ -62,14 +62,14 @@ export default function AvatarDropdown() {
           alt="avatar"
           className="w-12 h-12 rounded-full object-cover"
         />
-        <div className="flex flex-col">
+        <div className="hidden md:flex flex-col">
           <span className="text-sm dark:text-white font-medium">{user?.name}</span>
           <span className="text-sm text-gray-700 dark:text-gray-300">{user?.email}</span>
         </div>
       </div>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-36 bg-white border rounded-md shadow-lg z-50">
+        <div className="absolute right-0 mt-2 w-28 md:w-36 bg-white border rounded-md shadow-lg z-50">
           <div className="relative">
             <button
               className="w-full px-4 py-2 text-left hover:bg-gray-100 flex justify-between items-center"

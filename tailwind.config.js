@@ -11,6 +11,8 @@ export default {
         "primary-4": "#72BAFF",
         "stroke-200": "#767373",
         "blue-50": "#F1F9F9",
+        "blue-100": "#D3EFFA",
+        "blue-200": "#A6E6FF",
         "green-100": "#F1F5F2",
         "gray-200": "#A09E9E",
         "black-400": "#000000",

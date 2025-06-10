@@ -7,12 +7,18 @@ const Layout = () => {
   return (
     <div className="flex flex-col h-screen">
         <Header />
-      <div className="flex flex-1">
-        <Sidebar />
-        <main className="flex-1 px-28 pt-10 overflow-auto dark:bg-black-400">
+      <div className="flex flex-1 mb-5">
+       <div className="sticky top-[70px] left-0 hidden md:block h-screen z-20">
+          <Sidebar />
+        </div>
+        <main className="flex-1 px-4 md:px-28 pt-10 overflow-auto dark:bg-black-400">
           <Outlet />    
         </main>
       </div>
+      <div className="w-full block md:hidden sticky bottom-0 z-10 bg-white">
+        <Sidebar />
+      </div>
+
     </div>
   );
 };

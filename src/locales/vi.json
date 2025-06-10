@@ -26,7 +26,8 @@
   "practice": "Tập luyện",
   "learn": "Học",
   "typeIn": "Nhập bản dịch đúng",
-  "country": "Tiếng Anh",
+  "language": "Tiếng Anh",
+  "languageVi": "Tiếng Việt",
   "suggest": "Đề xuất",
   "sound": "Nghe",
   "next": "Tiếp theo",
@@ -42,6 +43,9 @@
   "hidePassword": "Ẩn mật khẩu",
   "incorrectPassword": "Mật khẩu không trùng khớp!!!",
   "updateSuccess": "Đã cập nhật thành công",
-  "updateFailed": "Cập nhật thất bại!!!"
+  "updateFailed": "Cập nhật thất bại!!!",
+  "createSuccess": "Đã tạo từ vựng thành công",
+  "createFailed": "Tạo từ vựng thất bại!!!",
+  "emptyWarning": "Bạn đã hoàn thành chủ đề này."
 
 }

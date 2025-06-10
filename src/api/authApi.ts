@@ -28,7 +28,6 @@ const authApi = {
             formData.append('name', data.name);
         }
         if (data.avatarFile) {
-            console.log('data: ',data);
             formData.append('file', data.avatarFile);
         }
         if (data.password) {

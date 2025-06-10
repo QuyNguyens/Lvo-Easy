@@ -40,7 +40,7 @@ export default function LanguageSelector() {
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="hidden relative md:inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center justify-between border rounded px-6 py-3 shadow-sm"

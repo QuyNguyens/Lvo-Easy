@@ -1,12 +1,14 @@
 import { useTranslation } from "react-i18next"
 import SentenceInput from "../components/SentenceInput";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CreatableSelect from 'react-select/creatable';
 import vocabApi from "../api/vocabApi";
 import { useAuth } from "../context/UserContext";
 import { VocabCreateRequest } from "../types/vocab";
 import { Topic } from "../types/topic";
 import topicApi from "../api/topicApi";
+import Toast from "../components/Toast";
+import { useToast } from "../hooks/useToast";
 
 interface VocabType{
   enWord: string;
@@ -18,7 +20,9 @@ const WriteVocabPage = () => {
   const [selectedTopic, setSelectedTopic] = useState<Topic>();
   const [sentences, setSentences] = useState<string[]>([]);
   const [topics, setTopics] = useState<Topic[]>();
-  const [vocabs, setVocabs] = useState<VocabType>({
+  const {toast, showToast} = useToast();
+  
+  const [vocab, setVocab] = useState<VocabType>({
     enWord: '',
     viWord: ''
   });
@@ -28,7 +32,7 @@ const WriteVocabPage = () => {
 
   const fetchTopic = async () =>{
     try {
-      const topicsData = await topicApi.getAll(user._id || "");
+      const topicsData = await topicApi.getAll(user?._id || "", false);
       setSelectedTopic(topicsData[0]);
       setTopics(topicsData);
     } catch (error) {
@@ -61,17 +65,20 @@ const WriteVocabPage = () => {
   };
 
   const handleSave = async () =>{
+    if(!selectedTopic){
+      return ;
+    }
     try {
       const req: VocabCreateRequest = {
-        word: vocabs.enWord,
-        meaning: vocabs.viWord,
+        word: vocab.enWord,
+        meaning: vocab.viWord,
         example: sentences,
         topicId: '',
         isSystemVocab: false,
-        createBy: user._id || '',
+        createBy: user?._id || '',
         topicName: ''
       }
-      if(vocabs.enWord === "" || vocabs.viWord == ""){
+      if(vocab.enWord === "" || vocab.viWord == ""){
         setIsEmptyField(true);
       }else{
         const isExisting = topics?.some(topic => topic._id === selectedTopic?._id);
@@ -82,6 +89,8 @@ const WriteVocabPage = () => {
         }
   
         await vocabApi.create(req);
+        showToast(t("createSuccess"), 'success');
+
         if(!isExisting){
           await fetchTopic();
         }
@@ -89,13 +98,14 @@ const WriteVocabPage = () => {
 
     } catch (error) {
       console.error("create failed: ", error);
+      showToast(t("createFailed"), 'error');
     }
   }
 
   const handleVocabChange = (key: keyof VocabType, value: string) => {
     const trimmedValue = value;
 
-    setVocabs((prev) => ({
+    setVocab((prev) => ({
       ...prev,
       [key]: trimmedValue,
     }));
@@ -104,7 +114,7 @@ const WriteVocabPage = () => {
   };
 
   const handleReset = () =>{
-    setVocabs({
+    setVocab({
       enWord: '',
       viWord: ''
     })
@@ -133,12 +143,12 @@ const WriteVocabPage = () => {
         </div>
         {!selectedTopic &&<p className="text-base16 text-red-500">{t("emptyTopic")}</p>}
       </div>
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
         <div className="flex flex-col gap-2">
           <h2 className="text-xl font-bold dark:text-white">{t("enWord")}:</h2>
           <input className="outline-none border border-gray-300 focus:border-primary-1 px-3 py-2 rounded-md"
             placeholder={t("palaceHolderEnWord")} type="text"
-            value={vocabs.enWord}
+            value={vocab.enWord}
             onChange={(e) => handleVocabChange("enWord", e.target.value)}
           />
         </div>
@@ -146,7 +156,7 @@ const WriteVocabPage = () => {
           <h2 className="text-xl font-bold dark:text-white">{t("viWord")}:</h2>
           <input className="outline-none border border-gray-300 focus:border-primary-1 px-3 py-2 rounded-md"
             placeholder={t("palaceHolderViWord")} type="text"
-            value={vocabs.viWord}
+            value={vocab.viWord}
             onChange={(e) => handleVocabChange("viWord", e.target.value)}
           />
         </div>
@@ -160,6 +170,7 @@ const WriteVocabPage = () => {
         <button onClick={handleReset} className="bg-primary-4 text-white font-medium text-base16 px-4 py-2 rounded-md">{t("reset")}</button>
         <button onClick={handleSave} className="bg-primary-1 text-white font-medium text-base16 px-4 py-2 rounded-md">{t("save")}</button>
       </div>
+      {toast.show && <Toast message={toast.message} status={toast.status} />}
     </div>
   )
 }

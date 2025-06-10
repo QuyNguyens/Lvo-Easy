@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 type ToastProps = {
   message: string;
-  status: 'success' | 'error' | 'info';
+  status: 'success' | 'error' | 'warn';
   duration?: number;
 };
 
@@ -34,7 +34,7 @@ const Toast: React.FC<ToastProps> = ({ message, status, duration = 3000 }) => {
             select-none
             ${status === 'success' ? 'bg-green-500' : ''}
             ${status === 'error' ? 'bg-red-500' : ''}
-            ${status === 'info' ? 'bg-blue-500' : ''}
+            ${status === 'warn' ? 'bg-orange-500' : ''}
         `}
         role="alert"
         >

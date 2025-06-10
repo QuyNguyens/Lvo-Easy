@@ -1,6 +1,7 @@
 export interface Topic {
   _id: string;
   name: string;
+  status?: boolean;
   vocabularyCount: number;
 }
 

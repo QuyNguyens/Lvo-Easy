@@ -26,7 +26,8 @@
   "practice": "Practice",
   "learn": "Learn",
   "typeIn": "Type in the correct translation",
-  "country": "English",
+  "language": "English",
+  "languageVi": "Vietnamese",
   "suggest": "Suggest",
   "sound": "Sound",
   "next": "Next",
@@ -42,5 +43,8 @@
   "hidePassword": "Hide password",
   "incorrectPassword": "Password must be the same!!!",
   "updateSuccess": "Updated successfully",
-  "updateFailed": "Updated Failed!!!"
+  "updateFailed": "Updated Failed!!!",
+  "createSuccess": "Created successfully",
+  "createFailed": "Created Failed!!!",
+  "emptyWarning": "You have completed this topic."
 }
