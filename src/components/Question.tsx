@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { audioPlay } from "../helpers/audioHelper";
 import vocabApi from "../api/vocabApi";
 import { useAuth } from "../context/UserContext";
+import { useSettings } from "../context/SettingsContext";
 
 interface QuestionProps{
     questions: string[];
@@ -21,6 +22,7 @@ const Question = ({questions, vocab, isSystem}: QuestionProps) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {user} = useAuth();
+    const {settings} = useSettings();
 
     useEffect(() => {
         dispatch(setAnswer(null));
@@ -44,7 +46,7 @@ const Question = ({questions, vocab, isSystem}: QuestionProps) => {
                 }
                 debounceRef.current = window.setTimeout(() => {
                     if (question === vocab) {
-                        vocabApi.update(user?._id || '', vocabList[current]._id);
+                        vocabApi.update(user?._id || '', vocabList[current]._id, settings?.remindTime || 3);
                         if(isSystem){
                             navigate('/system-vocab/learn-input');
                         }else{

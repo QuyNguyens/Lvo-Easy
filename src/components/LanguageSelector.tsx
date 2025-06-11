@@ -16,41 +16,39 @@ const languages = [
 ];
 
 export default function LanguageSelector() {
-  const [selected, setSelected] = useState(languages[0]);
   const [isOpen, setIsOpen] = useState(false);
   const { i18n } = useTranslation();
 
-  useEffect(() =>{
+  const selected = languages.find((l) => l.code === i18n.language) || languages[0];
+
+  useEffect(() => {
     const savedLangCode = localStorage.getItem("language");
     const matchedLang = languages.find((l) => l.code === savedLangCode);
-
-    if (matchedLang) {
-      setSelected(matchedLang);
+    if (matchedLang && matchedLang.code !== i18n.language) {
       i18n.changeLanguage(matchedLang.code);
-    } else {
-      i18n.changeLanguage(selected.code);
     }
-  },[]);
+  }, []);
 
-  const handleSelect = (lang: typeof selected) => {
-    setSelected(lang);
+  const handleSelect = (lang: (typeof languages)[0]) => {
     i18n.changeLanguage(lang.code);
+    localStorage.setItem("language", lang.code);
     setIsOpen(false);
-    localStorage.setItem('language', lang.code);
   };
 
   return (
-    <div className="hidden relative md:inline-block text-left">
+    <div className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between border rounded px-6 py-3 shadow-sm"
+        className="flex items-center justify-between border rounded w-32 px-3 py-2 shadow-sm"
       >
-        <img
-          src={selected.icon}
-          alt={selected.code}
-          className="w-5 h-5 rounded-full mr-2"
-        />
-        <span className="font-medium dark:text-white">{selected.code}</span>
+        <p className="flex items-center">
+          <img
+            src={selected.icon}
+            alt={selected.code}
+            className="w-5 h-5 rounded-full mr-2"
+          />
+          <span className="font-medium dark:text-white">{selected.code}</span>
+        </p>
         <ChevronDownIcon className="w-4 h-4 ml-2 dark:text-white" />
       </button>
 

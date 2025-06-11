@@ -28,7 +28,7 @@ const MyVocabPage = () => {
   return (
     <div className="flex flex-col gap-5">
       <h1 className="text-center font-bold text-4xl dark:text-white">{t("practice")}</h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 gap-10">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-10">
         {
           topics && topics.map((topic, index) =>{
             return <TopicItem key={index} topic={topic} isSystem={false}/>

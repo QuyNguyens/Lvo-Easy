@@ -80,7 +80,7 @@ const VocabularyInput: React.FC<VocabularyInputProps> = ({ vocab, current, isSys
 
   return (
     <div className="flex flex-col gap-1">
-      <label className="block text-base18 font-medium dark:text-white">English</label>
+      <label className="block text-base18 font-medium dark:text-white">{t('language')}</label>
       <input
         type="text"
         value={input}

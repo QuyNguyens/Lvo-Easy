@@ -46,6 +46,12 @@
   "updateFailed": "Cập nhật thất bại!!!",
   "createSuccess": "Đã tạo từ vựng thành công",
   "createFailed": "Tạo từ vựng thất bại!!!",
-  "emptyWarning": "Bạn đã hoàn thành chủ đề này."
-
+  "emptyWarning": "Bạn đã hoàn thành chủ đề này.",
+  "emptyPracticeWarning": "Bạn phải học từ vựng trước khi thực hành.",
+  "settingsTitle": "Điều chỉnh theo cách của bạn",
+  "amountLearn": "Lấy số từ vựng để học",
+  "amountPractice": "Lấy số từ vựng để luyện tập",
+  "remindTime": "Thời gian nhắc nhở sau khi học từ vựng",
+  "languageMean": "Ngôn ngữ",
+  "settingSave": "Đã lưu thành công"
 }

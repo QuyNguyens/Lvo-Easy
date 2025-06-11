@@ -33,7 +33,7 @@ const TopicPracticePage = () => {
 
   if(current === vocabList.length){
     dispatch(reset());
-    navigate(`/${segments[0]}}`);
+    navigate(`/${segments[0]}`);
   }
 
   const handleUnKnow = () =>{
@@ -45,14 +45,14 @@ const TopicPracticePage = () => {
         <h1 className="text-4xl font-medium text-center dark:text-white pb-3">{t("practice")}</h1>
         <VocabProgress total={vocabList.length} current={current} title={t("typeIn")}/>
         <div className="w-full flex justify-end">
-          <button onClick={selectedAnswer ? undefined : handleUnKnow} className="w-24 rounded-md flex flex-col bg-primary-1 hover:bg-primary-3 py-2 text-white justify-center items-center">
+          <button onClick={selectedAnswer ? undefined : handleUnKnow} className="w-28 rounded-md flex flex-col bg-primary-1 hover:bg-primary-3 py-2 text-white justify-center items-center">
             <QuestionMarkCircleIcon className="h-10 w-10" />
             <span className="w-[70%]">
               {t("unKnown")}
             </span>
           </button>
         </div>
-        <h2 className="text-center text-3xl font-medium dark:text-white">{vocabList[current]?.word}</h2>
+        <h2 className="text-center text-3xl font-medium dark:text-white">{vocabList[current]?.meaning}</h2>
         <VocabularyInput vocab={vocabList[current]?.word} current={current} isSystem={false}/>
         <Question questions={shuffledChoices} vocab={vocabList[current]?.word} isSystem={false}/>
     </div>

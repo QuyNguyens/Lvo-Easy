@@ -11,6 +11,7 @@ import vocabApi from "../api/vocabApi";
 import { useAuth } from "../context/UserContext";
 import { PhoneticInfo } from "../types/vocab";
 import WordMean from "../components/WordMean";
+import { useSettings } from "../context/SettingsContext";
 
 
 const TopicRememberPage = () => {
@@ -23,6 +24,7 @@ const TopicRememberPage = () => {
     audio: ''
   });
 
+  const {settings} = useSettings();
   const location = useLocation();
   const segments = location.pathname.split('/').filter(Boolean);
 
@@ -46,7 +48,7 @@ const TopicRememberPage = () => {
   },[]);
 
   const handleNext = async () =>{
-    vocabApi.update(user?._id || '', vocabList[current]._id);
+    vocabApi.update(user?._id || '', vocabList[current]._id, settings?.remindTime || 3);
     if(current + 1 === vocabList.length){
       dispatch(reset());
       navigate(`/${segments[0]}`);
@@ -63,7 +65,7 @@ const TopicRememberPage = () => {
         <div className="flex justify-between">
           <WordMean phonetic={phonetic}/>
           <div>
-            <div className="flex flex-col justify-center items-center gap-1 w-20 py-3 rounded-md bg-primary-1 hover:bg-primary-3 text-white font-semibold"
+            <div className="flex flex-col justify-center items-center gap-1 w-24 h-24 py-3 rounded-md bg-primary-1 hover:bg-primary-3 text-white font-semibold"
                onClick={handleNext}
           >
             <ArrowRightCircleIcon className="w-8 h-8"/>

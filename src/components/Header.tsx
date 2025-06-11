@@ -9,7 +9,9 @@ const Header = () => {
       <img src={Logo} alt="logo" className="block dark:hidden" />
       <img src={LogoDark} alt="logo-dark" className="hidden dark:block" />
       <div className='flex items-center gap-8 mr-5 md:mr-20'>
-        <LanguageSelector/>
+        <div className='hidden md:block'>
+          <LanguageSelector/>
+        </div>
         <AvatarDropdown/>
       </div>
     </div>

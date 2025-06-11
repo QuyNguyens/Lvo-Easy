@@ -46,5 +46,12 @@
   "updateFailed": "Updated Failed!!!",
   "createSuccess": "Created successfully",
   "createFailed": "Created Failed!!!",
-  "emptyWarning": "You have completed this topic."
+  "emptyWarning": "You have completed this topic.",
+  "emptyPracticeWarning": "You must learn vocabulary before practicing.",
+  "settingsTitle": "Settings it your way",
+  "amountLearn": "Take number of vocabulary to learn",
+  "amountPractice": "Take number of vocabulary to practice",
+  "remindTime": "Reminder time after learning vocabulary",
+  "languageMean": "Language",
+  "settingSave": "Save successfully"
 }

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "../hooks/useToast";
 import { useTranslation } from "react-i18next";
 import Toast from "../components/Toast";
+import { useSettings } from "../context/SettingsContext";
 
 interface TopicItemProps{
     topic: Topic;
@@ -22,28 +23,29 @@ const TopicItem = ({topic, isSystem}: TopicItemProps) => {
     const disPatch = useDispatch();
     const navigate = useNavigate();
     const {t} = useTranslation();
-
+    const {settings} = useSettings();
+    console.log('settings: ', settings);
     const handleGetVocab = async () =>{
       try {
-        const res = await vocabApi.getByTopic(user?._id || '',isSystem, topic._id);
+        const res = await vocabApi.getByTopic(user?._id || '',isSystem, topic._id, settings?.amountPractice || 20);
 
-        disPatch(setVocabData({
-          vocabList: res.vocab,
-          vocabRandom: res.vocabRandom
-        }));
-        if(isSystem){
-          navigate('/system-vocab/practice');
+        if(res.vocab.length === 0){
+          showToast(t("emptyPracticeWarning"), 'warn');
         }else{
-          navigate('/my-vocab/practice');
+          disPatch(setVocabData({
+            vocabList: res.vocab,
+            vocabRandom: res.vocabRandom
+          }));
+          navigate(`practice`);
         }
-
       } catch (error) {
         console.error('get vocab failed: ', error);
       }
     }
 
     const handleLearn = async () =>{
-      const res = await vocabApi.getWordsToLearn(user?._id || '', topic._id);
+      const res = await vocabApi.getWordsToLearn(user?._id || '', topic._id, settings?.amountLearn || 5);
+
         if(res.vocab.length === 0){
           showToast(t("emptyWarning"), 'warn');
         }else{
@@ -51,7 +53,7 @@ const TopicItem = ({topic, isSystem}: TopicItemProps) => {
             vocabList: res.vocab,
             vocabRandom: res.vocabRandom
           }));
-          navigate('/my-vocab/practice');
+          navigate(`practice`);
         }
     }
 

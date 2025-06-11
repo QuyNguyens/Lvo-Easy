@@ -6,12 +6,12 @@ const vocabApi = {
     create: async (data: VocabCreateRequest) => {
         await axiosClient.post('/vocab/create', data);
     },
-    getByTopic: async(userId: string, isSystem: boolean, topicId: string) : Promise<VocabResponse> =>{
-        const res = await axiosClient.get(`vocab/topic?topicId=${topicId}&isSystemVocab=${isSystem}&userId=${userId}`);
+    getByTopic: async(userId: string, isSystem: boolean, topicId: string, limit: number) : Promise<VocabResponse> =>{
+        const res = await axiosClient.get(`vocab/topic?topicId=${topicId}&isSystemVocab=${isSystem}&userId=${userId}&limit=${limit}`);
         return res.data.data;
     },
-    getWordsToLearn: async(userId: string, topicId: string) : Promise<VocabResponse> =>{
-        const res = await axiosClient.get(`vocab/vocab-learn?topicId=${topicId}&&userId=${userId}`);
+    getWordsToLearn: async(userId: string, topicId: string, limit: number) : Promise<VocabResponse> =>{
+        const res = await axiosClient.get(`vocab/vocab-learn?topicId=${topicId}&userId=${userId}&limit=${limit}`);
         return res.data.data;
     },
     getVocab: async(vocab: string) : Promise<PhoneticInfo> =>{
@@ -26,8 +26,8 @@ const vocabApi = {
         };
         return data;
     },
-    update: async(userId: string, vocabId: string) =>{
-        await axiosClient.post('vocabStatus/update',{userId: userId, vocabId: vocabId});
+    update: async(userId: string, vocabId: string, remindTime: number) =>{
+        await axiosClient.post('vocabStatus/update',{userId, vocabId, remindTime});
     }
 }
 
