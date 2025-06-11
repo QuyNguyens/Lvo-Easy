@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { useTranslation } from "react-i18next";
+import ViIcon from "../assets/vietnam-icon.png";
+import UsIcon from "../assets/us-icon.png";
 
 const languages = [
   {
     code: "VIE",
     name: "Tiếng Việt",
-    icon: "/src/assets/vietnam-icon.png",
+    icon: ViIcon,
   },
   {
     code: "ENG",
     name: "English",
-    icon: "/src/assets/us-icon.png",
+    icon: UsIcon,
   },
 ];
 
