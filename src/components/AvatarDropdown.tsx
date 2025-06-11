@@ -47,6 +47,8 @@ export default function AvatarDropdown() {
     if(option === "Logout"){
       clearUser();
       navigate('/login');
+    }else if(option === "Profile"){
+      navigate('/profile');
     }
     setOpen(false);
     setThemeOpen(false);
