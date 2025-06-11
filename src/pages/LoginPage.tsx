@@ -85,14 +85,14 @@ const LoginPage = () => {
         <div className='flex gap-9 justify-center items-center'>
           <div className='flex justify-center items-center p-3 rounded-md bg-white hover:bg-gray-50 shadow-sm'
             onClick={() => {
-              window.location.href = 'http://localhost:3000/auth/google';
+              window.location.href= `${import.meta.env.VITE_LOGIN_GOOGLE_URL}`
             }}
           >
             <img className='w-6 h-6' src={GoogleIcon} alt="" />
           </div>
           <div className='flex justify-center items-center p-3 rounded-md bg-white hover:bg-gray-50 shadow-sm'
             onClick={() => {
-              window.location.href = 'http://localhost:3000/auth/facebook';
+              window.location.href = `${import.meta.env.VITE_LOGIN_FACEBOOK_URL}`;
             }}
           > 
             <img className='w-6 h-6' src={FacebookIcon} alt="" />
