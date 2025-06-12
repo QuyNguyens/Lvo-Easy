@@ -28,10 +28,13 @@ const authApi = {
     },
 
     updateProfile: async (data: UserProfile): Promise<UserProfile> => {
-        console.log('data: ', data);
         const formData = new FormData();
+
         if(data?._id){
             formData.append('id', data._id);
+        }
+        if(data?.email){
+            formData.append('email', data.email);
         }
         if(data?.name){
             formData.append('name', data.name);

@@ -19,7 +19,6 @@ const AuthSuccess = () => {
                 localStorage.setItem('access_token', token);
                 try {
                     const res = await authApi.loginToken(type || "");
-                    console.log('res: ', res);
                     const userData : UserProfile = {
                         email: res.email,
                         _id: res.userId,

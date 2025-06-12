@@ -20,6 +20,7 @@ interface UserFormData {
 const Profile: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isCorrectPassword, setIsCorrectPassword] = useState<boolean>(false);
+  const [isExistingEmail, setIsExistingEmail] = useState<boolean>(false);
   const {t} = useTranslation();
   const {toast, showToast} = useToast();
 
@@ -55,6 +56,9 @@ const Profile: React.FC = () => {
     if(name === "confirmPassword" || name === "newPassword"){
       setIsCorrectPassword(false);
     }
+    if(name === "email"){
+      setIsExistingEmail(false);
+    }
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -81,10 +85,13 @@ const Profile: React.FC = () => {
         avatarFile: formData.avatarFile
       }
       const res = await authApi.updateProfile(data);
-      if(res){
+      if(res._id){
         showToast(t("updateSuccess"), 'success');
         setUser(res);
+      }else{
+        setIsExistingEmail(true);
       }
+
     } catch (error) {
       console.error(error);
       showToast(t("updateFailed"), 'error');
@@ -123,9 +130,12 @@ const Profile: React.FC = () => {
           type="email"
           name="email"
           value={formData.email}
-          readOnly
+          readOnly = {user?.email ? true : false}
+          placeholder={user?.email ? '': 'Enter your email'}
+          onChange={handleChange}
           className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-100"
         />
+        {isExistingEmail && <p className='text-sm text-red-500 font-medium'>Email is existing!!!</p>}
       </div>
 
       {/* Name */}
