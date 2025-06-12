@@ -30,7 +30,7 @@ const NumberSelect: React.FC<NumberSelectProps> = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <h3 className="text-base18 font-medium dark:text-white">{label}</h3>
+      <h3 className="text-base18 font-medium">{label}</h3>
       <div className="min-w-32 w-full">
         <CreatableSelect
           isClearable={isClearable}

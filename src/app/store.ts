@@ -1,6 +1,7 @@
 // store.ts
 import { configureStore } from '@reduxjs/toolkit';
 import vocabSlice from '../feature/vocabSlice';
+import topicSlice from '../feature/topicSlice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // lưu vào localStorage
 
@@ -8,12 +9,13 @@ import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   vocab: vocabSlice,
+  topic: topicSlice,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['vocab'],
+  whitelist: ['vocab','topic'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

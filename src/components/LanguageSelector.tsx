@@ -49,9 +49,9 @@ export default function LanguageSelector() {
             alt={selected.code}
             className="w-5 h-5 rounded-full mr-2"
           />
-          <span className="font-medium dark:text-white">{selected.code}</span>
+          <span className="font-medium dark:text-gray-200">{selected.code}</span>
         </p>
-        <ChevronDownIcon className="w-4 h-4 ml-2 dark:text-white" />
+        <ChevronDownIcon className="w-4 h-4 ml-2 dark:text-gray-200" />
       </button>
 
       {isOpen && (

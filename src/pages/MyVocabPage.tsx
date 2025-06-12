@@ -1,28 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Topic } from "../types/topic";
 import topicApi from "../api/topicApi";
 import { useAuth } from "../context/UserContext";
 import TopicItem from "./TopicItem";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../app/store";
+import { setMyTopic } from "../feature/topicSlice";
 
 const MyVocabPage = () => {
-  const [topics, setTopics] = useState<Topic[]>([]);
+  const myTopic = useSelector((state: RootState) => state.topic.myTopic);
 
   const {t} = useTranslation();
   const {user} = useAuth();
+  const dispatch = useDispatch();
 
   useEffect(() =>{
     const fetchTopic = async () =>{
       try {
         const topicsData = await topicApi.getAll(user?._id || '', false);
         if(topicsData){
-          setTopics(topicsData);
+          dispatch(setMyTopic(topicsData));
         }
       } catch (error) {
         console.error('get topics failed!!!');
       }
     }
-    fetchTopic()
+    if(myTopic === null){
+      fetchTopic();
+    }
   },[]);
 
   return (
@@ -30,7 +35,7 @@ const MyVocabPage = () => {
       <h1 className="text-center font-bold text-4xl dark:text-white">{t("practice")}</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-10">
         {
-          topics && topics.map((topic, index) =>{
+          myTopic && myTopic.map((topic, index) =>{
             return <TopicItem key={index} topic={topic} isSystem={false}/>
           })
         }

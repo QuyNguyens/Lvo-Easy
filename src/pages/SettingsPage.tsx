@@ -34,7 +34,7 @@ const SettingsPage = () => {
       <h1 className="text-4xl text-center font-semibold mb-10 dark:text-white">
         {t("settingsTitle")}
       </h1>
-      <div className="w-full md:w-3/4 xl:w-3/5 mx-auto flex flex-col gap-4 p-5 shadow-lg">
+      <div className="w-full md:w-3/4 xl:w-3/5 mx-auto flex flex-col gap-4 p-5 shadow-lg bg-white rounded-md">
         <NumberSelect
           label={t("amountLearn")}
           value={selectedAmountLearn}
@@ -57,11 +57,11 @@ const SettingsPage = () => {
         />
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           <div className="flex items-center gap-3">
-            <h3 className="text-base18 font-medium dark:text-white">{t("languageMean")}:</h3>
+            <h3 className="text-base18 font-medium">{t("languageMean")}:</h3>
             <LanguageSelector/>
           </div>
           <div className="flex items-center gap-3">
-            <h3 className="text-base18 font-medium dark:text-white">{t("themes")}:</h3>
+            <h3 className="text-base18 font-medium">{t("themes")}:</h3>
             <ThemeToggle/>
           </div>
         </div>

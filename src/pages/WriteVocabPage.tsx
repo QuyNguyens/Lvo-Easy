@@ -9,6 +9,9 @@ import { Topic } from "../types/topic";
 import topicApi from "../api/topicApi";
 import Toast from "../components/Toast";
 import { useToast } from "../hooks/useToast";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../app/store";
+import { setMyTopic } from "../feature/topicSlice";
 
 interface VocabType{
   enWord: string;
@@ -19,41 +22,44 @@ const WriteVocabPage = () => {
   const {t} = useTranslation();
   const [selectedTopic, setSelectedTopic] = useState<Topic>();
   const [sentences, setSentences] = useState<string[]>([]);
-  const [topics, setTopics] = useState<Topic[]>();
   const {toast, showToast} = useToast();
-  
+  const myTopic = useSelector((state: RootState) => state.topic.myTopic);
   const [vocab, setVocab] = useState<VocabType>({
     enWord: '',
     viWord: ''
   });
   const [isEmptyField, setIsEmptyField] = useState<boolean>(false);
-
   const {user} = useAuth();
+  const dispatch = useDispatch();
 
   const fetchTopic = async () =>{
     try {
       const topicsData = await topicApi.getAll(user?._id || "", false);
       setSelectedTopic(topicsData[0]);
-      setTopics(topicsData);
+      dispatch(setMyTopic(topicsData));
     } catch (error) {
       console.error('get topics failed: ', error);
     }
   } 
 
   useEffect(() =>{
-    fetchTopic();
-  },[]);
+    if(myTopic === null){
+      fetchTopic();
+    }else{
+      setSelectedTopic(myTopic[0]);
+    }
+  },[myTopic]);
 
   const options = useMemo(() => {
-    return topics?.map(topic => ({
+    return myTopic?.map(topic => ({
       value: topic._id,
       label: topic.name,
     })) || [];
-  }, [topics]);
+  }, [myTopic]);
 
   const handleChange = (option: { value: string; label: string } | null) => {
     if (option) {
-      const foundTopic = topics?.find(topic => topic._id === option.value);
+      const foundTopic = myTopic?.find(topic => topic._id === option.value);
       if (foundTopic) {
         setSelectedTopic(foundTopic);
       } else {
@@ -81,7 +87,7 @@ const WriteVocabPage = () => {
       if(vocab.enWord === "" || vocab.viWord == ""){
         setIsEmptyField(true);
       }else{
-        const isExisting = topics?.some(topic => topic._id === selectedTopic?._id);
+        const isExisting = myTopic?.some(topic => topic._id === selectedTopic?._id);
         if (isExisting) {
           req.topicId = selectedTopic?._id;
         }else{
@@ -92,7 +98,7 @@ const WriteVocabPage = () => {
         showToast(t("createSuccess"), 'success');
 
         if(!isExisting){
-          await fetchTopic();
+          dispatch(setMyTopic(null));
         }
       }
 

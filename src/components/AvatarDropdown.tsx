@@ -4,6 +4,8 @@ import Avatar from "../assets/avatar.webp";
 import ThemeSelector from "./ThemeSelector";
 import { useAuth } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setMyTopic, setSystemTopic } from "../feature/topicSlice";
 
 export default function AvatarDropdown() {
   const [open, setOpen] = useState(false);
@@ -15,6 +17,7 @@ export default function AvatarDropdown() {
   const toggleTheme = () => setThemeOpen(!themeOpen);
   const navigate = useNavigate();
   const {user} = useAuth();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -46,6 +49,7 @@ export default function AvatarDropdown() {
   const handleSelect = (option: string) => {
     if(option === "Logout"){
       clearUser();
+      dispatch(setMyTopic(null));
       navigate('/login');
     }else if(option === "Profile"){
       navigate('/profile');
