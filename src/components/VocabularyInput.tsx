@@ -27,7 +27,7 @@ const VocabularyInput: React.FC<VocabularyInputProps> = ({ vocab, current, isSys
   },[vocab]);
 
   const vocabCompare = async () => {
-    if(vocab === input){
+    if(vocab.toLowerCase() === input.toLowerCase()){
       if(!isSystem){
         dispatch(setAnswer(input));
       }

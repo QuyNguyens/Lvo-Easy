@@ -35,35 +35,37 @@ const Question = ({questions, vocab, isSystem}: QuestionProps) => {
         if (debounceRef.current !== null) {
             clearTimeout(debounceRef.current);
         }
-        setTimeout(async () => {
-            try {
-                if(!vocab.includes(' ')){
+        try {
+            if (!vocab.includes(' ')) {
+                try {
                     const phonetic = await vocabApi.getVocab(vocab);
-    
                     if (phonetic?.audio) {
                         await audioPlay(phonetic.audio);
-                    }  
-                }
-                debounceRef.current = window.setTimeout(() => {
-                    if (question === vocab) {
-                        vocabApi.update(user?._id || '', vocabList[current]._id, settings?.remindTime || 3);
-                        if(isSystem){
-                            navigate('/system-vocab/learn-input');
-                        }else{
-                            dispatch(setCurrent(current + 1));
-                        }
-                    } else {
-                        if(isSystem){
-                            navigate('/system-vocab/learn')
-                        }else{
-                            navigate('/my-vocab/remember');
-                        }
                     }
-                },1000);
-            } catch (error) {
-            console.error('something was wrong with audio path: ', error);
+                } catch (error) {
+                    console.log("can't read the audio: ", error);
+                }
             }
-        }, 0);
+            debounceRef.current = window.setTimeout(() => {
+                if (question === vocab) {
+                    vocabApi.update(user?._id || '', vocabList[current]._id, settings?.remindTime || 3);
+                    if (isSystem) {
+                        navigate('/system-vocab/learn-input');
+                    } else {
+                        dispatch(setCurrent(current + 1));
+                    }
+                } else {
+                    if (isSystem) {
+                        navigate('/system-vocab/learn');
+                    } else {
+                        navigate('/my-vocab/remember');
+                    }
+                }
+            }, 1000);
+
+        } catch (error) {
+            console.log('Something went wrong:', error);
+        }
     };
 
 
