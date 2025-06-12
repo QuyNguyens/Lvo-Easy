@@ -5,10 +5,11 @@ import { useAuth } from "../context/UserContext";
 import TopicItem from "./TopicItem";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
-import { setMyTopic } from "../feature/topicSlice";
+import { setIsMyTopic, setMyTopic } from "../feature/topicSlice";
 
 const MyVocabPage = () => {
   const myTopic = useSelector((state: RootState) => state.topic.myTopic);
+  const isMyTopic = useSelector((state: RootState) => state.topic.isMyTopic);
 
   const {t} = useTranslation();
   const {user} = useAuth();
@@ -25,8 +26,9 @@ const MyVocabPage = () => {
         console.error('get topics failed!!!');
       }
     }
-    if(myTopic === null){
+    if(myTopic === null || !isMyTopic){
       fetchTopic();
+      dispatch(setIsMyTopic(true));
     }
   },[]);
 

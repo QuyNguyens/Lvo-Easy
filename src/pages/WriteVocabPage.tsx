@@ -11,7 +11,7 @@ import Toast from "../components/Toast";
 import { useToast } from "../hooks/useToast";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
-import { setMyTopic } from "../feature/topicSlice";
+import { setIsMyTopic, setMyTopic } from "../feature/topicSlice";
 
 interface VocabType{
   enWord: string;
@@ -100,6 +100,7 @@ const WriteVocabPage = () => {
         if(!isExisting){
           dispatch(setMyTopic(null));
         }
+        dispatch(setIsMyTopic(false));
       }
 
     } catch (error) {

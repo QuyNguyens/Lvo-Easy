@@ -4,11 +4,13 @@ import { Topic } from '../types/topic';
 interface TopicData{
     systemTopic : Topic[] | null;
     myTopic: Topic[] | null;
+    isMyTopic: boolean;
 }
 
 const initialState : TopicData = {
     systemTopic: null,
     myTopic: null,
+    isMyTopic: false
 }
 
 const topicSlice = createSlice({
@@ -21,9 +23,12 @@ const topicSlice = createSlice({
         setMyTopic: (state, action: PayloadAction<Topic[] | null>) =>{
             state.myTopic = action.payload;
         },
+        setIsMyTopic: (state, action: PayloadAction<boolean>) =>{
+            state.isMyTopic = action.payload;
+        }
     }
 })
 
-export const {setSystemTopic, setMyTopic} = topicSlice.actions;
+export const {setSystemTopic, setMyTopic, setIsMyTopic} = topicSlice.actions;
 
 export default topicSlice.reducer;
