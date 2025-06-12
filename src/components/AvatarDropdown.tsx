@@ -5,7 +5,7 @@ import ThemeSelector from "./ThemeSelector";
 import { useAuth } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setMyTopic, setSystemTopic } from "../feature/topicSlice";
+import { setMyTopic } from "../feature/topicSlice";
 
 export default function AvatarDropdown() {
   const [open, setOpen] = useState(false);
