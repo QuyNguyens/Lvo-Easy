@@ -4,7 +4,7 @@ import { audioPlay } from '../helpers/audioHelper';
 import { SpeakerWaveIcon } from '@heroicons/react/24/outline';
 import { useTranslation } from 'react-i18next';
 import { PhoneticInfo } from '../types/vocab';
-import { JSX, useState } from 'react';
+import { useState } from 'react';
 import HighlightWordInSentence from './HighlightWordSentence';
 
 interface WordMeanProps{
