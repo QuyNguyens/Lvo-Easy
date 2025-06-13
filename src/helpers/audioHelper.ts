@@ -11,7 +11,7 @@ export const audioPlay = async (urlAudio: string): Promise<void> => {
       source.buffer = audioBuffer;
 
       const gainNode = audioContext.createGain();
-      gainNode.gain.value = 5.0;
+      gainNode.gain.value = 2.0;
 
       source.connect(gainNode);
       gainNode.connect(audioContext.destination);

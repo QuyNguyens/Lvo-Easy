@@ -53,7 +53,7 @@ const TopicItem = ({topic, isSystem}: TopicItemProps) => {
             vocabList: res.vocab,
             vocabRandom: res.vocabRandom
           }));
-          navigate(`practice`);
+          navigate(`learn`);
         }
     }
 
