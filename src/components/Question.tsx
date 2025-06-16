@@ -43,7 +43,7 @@ const Question = ({questions, vocab, isSystem}: QuestionProps) => {
                         await audioPlay(phonetic.audio);
                     }
                 } catch (error) {
-                    console.log("can't read the audio: ", error);
+                    console.error("can't read the audio: ", error);
                 }
             }
             debounceRef.current = window.setTimeout(() => {
@@ -64,7 +64,7 @@ const Question = ({questions, vocab, isSystem}: QuestionProps) => {
             }, 1000);
 
         } catch (error) {
-            console.log('Something went wrong:', error);
+            console.error('Something went wrong:', error);
         }
     };
 

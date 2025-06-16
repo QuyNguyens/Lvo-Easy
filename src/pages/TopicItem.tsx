@@ -24,7 +24,6 @@ const TopicItem = ({topic, isSystem}: TopicItemProps) => {
     const navigate = useNavigate();
     const {t} = useTranslation();
     const {settings} = useSettings();
-    console.log('settings: ', settings);
     const handleGetVocab = async () =>{
       try {
         const res = await vocabApi.getByTopic(user?._id || '',isSystem, topic._id, settings?.amountPractice || 20);

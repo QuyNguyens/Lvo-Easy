@@ -16,7 +16,6 @@ function App() {
    useEffect(() =>{
     document.documentElement.classList.remove("light", "dark");
     const theme = localStorage.getItem('theme');
-    console.log('theme: ', theme);
     if (theme ) {
       document.documentElement.classList.add(theme);
     }

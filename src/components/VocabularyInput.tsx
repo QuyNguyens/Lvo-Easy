@@ -32,9 +32,13 @@ const VocabularyInput: React.FC<VocabularyInputProps> = ({ vocab, current, isSys
         dispatch(setAnswer(input));
       }
       if(!input.includes(' ')){
-        const res = await vocabApi.getVocab(input);
-        if(res.audio != "" && res.audio != undefined){
-          await audioPlay(res.audio);
+        try {
+          const res = await vocabApi.getVocab(input);
+          if(res.audio != "" && res.audio != undefined){
+            await audioPlay(res.audio);
+          }
+        } catch (error) {
+          console.error("can't read the audio: ", error);
         }
       }
       dispatch(setCurrent(current + 1));

@@ -15,16 +15,14 @@ const SettingsPage = () => {
   const [selectedRemindTime, setSelectedRemindTime] = useState<number>(settings?.remindTime || 3);
 
   const {toast, showToast} = useToast();
-
   const {t} = useTranslation();
 
-  const handleSave = () =>{
+  const handleSave = () =>{ 
     const data : SettingsType = {
       amountLearn: selectedAmountLearn,
       amountPractice: selectedAmountPractice,
       remindTime: selectedRemindTime
     }
-
     setSettings(data);
     showToast(t("settingSave"), 'success');
   }
