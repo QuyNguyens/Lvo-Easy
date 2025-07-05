@@ -10,7 +10,6 @@ import { useToast } from "../hooks/useToast";
 import { useTranslation } from "react-i18next";
 import Toast from "../components/Toast";
 import { useSettings } from "../context/SettingsContext";
-import { Vocab } from "../types/vocab";
 import { shuffleArray } from "../helpers/questionRandom";
 
 interface TopicItemProps{
