@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react';
-import { BrowserRouter as Router, useNavigate, useRoutes } from 'react-router-dom';
+import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
 import routes from './routes/routes';
 import { AuthProvider, createAuthValue } from './context/UserContext';
 import "./i18n";
@@ -13,15 +13,15 @@ function AppRoutes() {
 function App() {
    const auth = createAuthValue();
    const settings = createSettingsValue();
-   const navigate = useNavigate();
+  //  const navigate = useNavigate();
 
-   const checkConnected = async () =>{
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/wake`);
-    if(res){
-      navigate('/');
-    }
-    navigate('/wake');
-   }
+  //  const checkConnected = async () =>{
+  //   const res = await fetch(`${import.meta.env.VITE_API_URL}/wake`);
+  //   if(res){
+  //     navigate('/');
+  //   }
+  //   navigate('/wake');
+  //  }
 
    useEffect(() =>{
     document.documentElement.classList.remove("light", "dark");
