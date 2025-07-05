@@ -8,7 +8,7 @@ import AppleIcon from '../assets/apple-icon.svg';
 import InputIcon from '../components/InputIcon';
 import { useNavigate } from 'react-router-dom';
 import authApi from '../api/authApi';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SignInRequest, UserProfile } from '../types/user';
 import { useAuth } from '../context/UserContext';
 
@@ -19,6 +19,22 @@ const LoginPage = () => {
   })
   const [isConfirmPassword, setIsConfirmPassword] = useState<boolean>(false);
 
+   const checkConnected = async () =>{
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/wake`);
+      if(res){
+        console.log('res: ', res);
+      }else{
+        console.log('res not');
+      }
+    } catch (error) {
+      console.error('resError: ', error);
+    }
+   }
+   useEffect(() =>{
+    checkConnected();
+   },[]);
+   
   const {setUser} = useAuth();
 
   const navigate = useNavigate();

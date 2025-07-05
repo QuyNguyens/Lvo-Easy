@@ -22,8 +22,13 @@ const ProfilePage = lazy(() => import('../pages/ProfilePage'));
 const LoginPage = lazy(() => import('../pages/LoginPage'));
 const SignUpPage = lazy(() => import('../pages/SignUpPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
+const ServerWakingPage = lazy(() => import('../pages/ServerWakingPage'));
 
 const routes: RouteObject[] = [
+  {
+    path: '/wait',
+    element: <PublicRoute><ServerWakingPage /></PublicRoute>,
+  },
   {
     path: '/login',
     element: <PublicRoute><LoginPage /></PublicRoute>,
@@ -77,4 +82,4 @@ const routes: RouteObject[] = [
   },
 ];
 
-export default routes;
+export default routes;  

@@ -10,6 +10,8 @@ import { useToast } from "../hooks/useToast";
 import { useTranslation } from "react-i18next";
 import Toast from "../components/Toast";
 import { useSettings } from "../context/SettingsContext";
+import { Vocab } from "../types/vocab";
+import { shuffleArray } from "../helpers/questionRandom";
 
 interface TopicItemProps{
     topic: Topic;
@@ -24,6 +26,7 @@ const TopicItem = ({topic, isSystem}: TopicItemProps) => {
     const navigate = useNavigate();
     const {t} = useTranslation();
     const {settings} = useSettings();
+
     const handleGetVocab = async () =>{
       try {
         const res = await vocabApi.getByTopic(user?._id || '',isSystem, topic._id, settings?.amountPractice || 20);
@@ -32,7 +35,7 @@ const TopicItem = ({topic, isSystem}: TopicItemProps) => {
           showToast(t("emptyPracticeWarning"), 'warn');
         }else{
           disPatch(setVocabData({
-            vocabList: res.vocab,
+            vocabList: shuffleArray(res.vocab),
             vocabRandom: res.vocabRandom
           }));
           navigate(`practice`);

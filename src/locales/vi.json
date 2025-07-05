@@ -53,5 +53,10 @@
   "amountPractice": "Lấy số từ vựng để luyện tập",
   "remindTime": "Thời gian nhắc nhở sau khi học từ vựng",
   "languageMean": "Ngôn ngữ",
-  "settingSave": "Đã lưu thành công"
+  "settingSave": "Đã lưu thành công",
+  "serverWaking": {
+    "serverStarting": "Server đang khởi động...",
+    "serverDesc": "Ứng dụng đang được đánh thức từ trạng thái 'ngủ' (Render Free Plan). Vui lòng đợi khoảng 10–15 giây để khởi động.",
+    "startingUp": "Đang khởi động"
+  }
 }

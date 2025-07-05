@@ -53,5 +53,10 @@
   "amountPractice": "Take number of vocabulary to practice",
   "remindTime": "Reminder time after learning vocabulary",
   "languageMean": "Language",
-  "settingSave": "Save successfully"
+  "settingSave": "Save successfully",
+  "serverWaking": {
+    "serverStarting": "Server is starting...",
+    "serverDesc": "The application is waking up from 'sleep' state (Render Free Plan). Please wait about 10–15 seconds for it to start.",
+    "startingUp": "Starting up"
+  }
 }
