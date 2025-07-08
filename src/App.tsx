@@ -13,15 +13,6 @@ function AppRoutes() {
 function App() {
    const auth = createAuthValue();
    const settings = createSettingsValue();
-  //  const navigate = useNavigate();
-
-  //  const checkConnected = async () =>{
-  //   const res = await fetch(`${import.meta.env.VITE_API_URL}/wake`);
-  //   if(res){
-  //     navigate('/');
-  //   }
-  //   navigate('/wake');
-  //  }
 
    useEffect(() =>{
     document.documentElement.classList.remove("light", "dark");
@@ -29,7 +20,6 @@ function App() {
     if (theme ) {
       document.documentElement.classList.add(theme);
     }
-    // checkConnected();
    },[]);
 
   return (

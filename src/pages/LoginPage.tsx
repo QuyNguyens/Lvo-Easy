@@ -18,27 +18,22 @@ const LoginPage = () => {
     password: ''
   })
   const [isConfirmPassword, setIsConfirmPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-   const checkConnected = async () =>{
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/wake`);
-      if(res){
-        console.log('res: ', res);
-      }else{
-        console.log('res not');
+  useEffect(() =>{
+    const checkServer = async () =>{
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/wake`);
+        if (!res.ok) throw new Error("Server not ready");
+      } catch(error) {
+        navigate("/wake");
       }
-    } catch (error) {
-      console.error('resError: ', error);
     }
-   }
-   useEffect(() =>{
-    checkConnected();
-   },[]);
+    checkServer();
+  },[navigate]);
    
   const {setUser} = useAuth();
 
-  const navigate = useNavigate();
-  
   const handleLogin = async () =>{
     try {
       const res = await authApi.login(signinRequest);

@@ -26,7 +26,7 @@ const ServerWakingPage = lazy(() => import('../pages/ServerWakingPage'));
 
 const routes: RouteObject[] = [
   {
-    path: '/wait',
+    path: '/wake',
     element: <PublicRoute><ServerWakingPage /></PublicRoute>,
   },
   {
